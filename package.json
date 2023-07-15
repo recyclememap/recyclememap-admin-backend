@@ -1,0 +1,44 @@
+{
+  "name": "recyclememap-admin-backend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "nodemon -r tsconfig-paths/register src/server.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "cookie-parser": "1.4.6",
+    "cors": "2.8.5",
+    "dotenv": "16.0.0",
+    "express": "4.17.2",
+    "express-validator": "6.14.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "1.4.2",
+    "@types/cors": "2.8.12",
+    "@types/express": "4.17.13",
+    "@types/node": "*",
+    "@typescript-eslint/eslint-plugin": "5.12.0",
+    "@typescript-eslint/parser": "5.12.0",
+    "eslint": "8.9.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-import-resolver-typescript": "2.5.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-prettier": "4.0.0",
+    "nodemon": "2.0.15",
+    "prettier": "2.5.1",
+    "ts-node": "10.5.0",
+    "tsconfig-paths": "3.12.0",
+    "typescript": "5.1.6"
+  },
+  "_moduleAliases": {
+    "@root": "./build/",
+    "@commons": "./build/commons",
+    "@controllers": "./build/utils",
+    "@facades": "./build/utils",
+    "@model": "./build/model",
+    "@routes": "./build/routes",
+    "@utils": "./build/utils"
+  }
+}
