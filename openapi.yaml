@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: Openstreetmap admin openapi-0.0
+  description: |-
+    Recycle map admin
+  version: 0.0.0
+servers:
+  - url: http://127.0.0.1:3102/api
+tags:
+  - name: markers
+    description: Map markers
+  - name: suggestions
+    description: Marker suggestions
+
+paths:
+  /markers:
+    get:
+      tags:
+        - markers
+      summary: Get all markers
+      description: Get all markers
+      operationId: getMarkers
+      responses:
+        '200':
+          $ref: '#/components/responses/Markers'
+  /markers/{markerId}:
+    parameters:
+      - in: path
+        name: markerId
+        required: true
+        schema:
+          type: integer
+    patch:
+      tags:
+        - suggestions
+      summary: Update an existing marker
+      description: Update an existing marker
+      operationId: updateMarker
+      requestBody:
+          $ref: '#/components/requestBodies/UpdateMarker'
+      responses:
+        '204':
+          description: No Content    
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+components:
+  schemas:
+    BadRequestDetails:
+      type: object
+      properties:
+        location:
+          type: string
+          example: 'body'
+        msg:
+          type: string
+          example: 'Field is required'
+        param:
+          type: string
+          example: 'param'
+    BadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'Invalid value'
+      additionalProperties:
+        $ref: '#/components/schemas/BadRequestDetails'
+    UpdateMarkerRequest:
+      type: object
+      properties:
+        position:
+          type: array
+          items:
+            type: number
+            example: [10.4, 10.4]
+    MarkersResponse:
+      required:
+        - id
+        - markers
+        - date
+      type: object
+      properties:
+        id:
+          type: string
+          example: '57e7012c-2b6f-4e8b-ab86-e9fb91d4754e'
+        markers:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              example: [[10.4, 10.4]]
+        date:
+          type: string
+          format: date-time
+          example: '2023-03-11T18:33:35.687+00:00'
+  requestBodies:
+    UpdateMarker:
+      description: Update an existing marker
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateMarkerRequest'
+  responses:
+    Markers:
+      description: List of markers
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/MarkersResponse'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestError'
