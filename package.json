@@ -5,14 +5,19 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "nodemon -r tsconfig-paths/register src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest",
+    "type": "tsc --noEmit",
+    "lint": "eslint src --ext .tsx --ext .ts --max-warnings 0",
+    "verify": "pnpm type && pnpm lint"
   },
   "dependencies": {
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.0.0",
     "express": "4.17.2",
-    "express-validator": "6.14.0"
+    "express-validator": "6.14.0",
+    "mongoose": "7.3.4"
   },
   "devDependencies": {
     "@types/cookie-parser": "1.4.2",
@@ -26,7 +31,7 @@
     "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-prettier": "4.0.0",
-    "nodemon": "2.0.15",
+    "nodemon": "3.0.1",
     "prettier": "2.5.1",
     "ts-node": "10.5.0",
     "tsconfig-paths": "3.12.0",
