@@ -1,6 +1,6 @@
 import { MarkersDB } from '@model/schemas';
 import { MarkerDto } from '@root/dtos';
-import { CreatedDBMarker } from '@root/dtos/markersDto/types';
+import { DBMarker } from '@root/dtos/markersDto/types';
 import { SuggesteMarkersList } from './types';
 
 export class MarkersFacade {
@@ -10,7 +10,7 @@ export class MarkersFacade {
     });
 
     const suggestedMarkersDto = suggestedMarkers.map(
-      (marker) => new MarkerDto(marker as CreatedDBMarker)
+      (marker) => new MarkerDto(marker as DBMarker)
     );
 
     return suggestedMarkersDto;

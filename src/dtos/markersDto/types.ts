@@ -1,4 +1,4 @@
-export type CreatedDBMarker = {
+export type DBMarker = {
   id: string;
   position: {
     suggestedValue: number[][];

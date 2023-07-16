@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const markersSchema = new mongoose.Schema({
+export const markersSchema = new Schema({
   id: {
     type: String,
     required: true
@@ -21,4 +21,4 @@ const markersSchema = new mongoose.Schema({
   }
 });
 
-export const MarkersDB = mongoose.model('Markers', markersSchema);
+export const MarkersDB = model('Markers', markersSchema);

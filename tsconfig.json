@@ -19,7 +19,6 @@
       "@commons/*": ["./commons/*"],
       "@controllers/*": ["./controllers/*"],
       "@facades/*": ["./facades/*"],
-      "@routes/*": ["./routes/*"],
       "@model/*": ["./model/*"],
     }
   },
