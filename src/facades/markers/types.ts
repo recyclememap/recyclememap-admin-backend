@@ -4,4 +4,4 @@ export type SuggestedMarker = {
   date: string;
 };
 
-export type SuggesteMarkersList = SuggestedMarker[];
+export type SuggestedMarkersList = SuggestedMarker[];
