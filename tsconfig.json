@@ -8,6 +8,7 @@
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
     "esModuleInterop": true, /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "sourceMap": true,
+    "skipLibCheck": true,
     "lib": [
       "ES2019"
     ],
@@ -18,7 +19,6 @@
       "@commons/*": ["./commons/*"],
       "@controllers/*": ["./controllers/*"],
       "@facades/*": ["./facades/*"],
-      "@routes/*": ["./routes/*"],
       "@model/*": ["./model/*"],
     }
   },

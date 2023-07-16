@@ -8,17 +8,17 @@ servers:
   - url: http://127.0.0.1:3102/api
 tags:
   - name: markers
-    description: Map markers
+    description: List of suggested markers
   - name: suggestions
-    description: Marker suggestions
+    description: Suggested marker
 
 paths:
   /markers:
     get:
       tags:
         - markers
-      summary: Get all markers
-      description: Get all markers
+      summary: Get suggested markers
+      description: Get suggested markers
       operationId: getMarkers
       responses:
         '200':
@@ -58,6 +58,7 @@ components:
         param:
           type: string
           example: 'param'
+        value: {}
     BadRequestError:
       type: object
       properties:
@@ -77,14 +78,14 @@ components:
     MarkersResponse:
       required:
         - id
-        - markers
+        - position
         - date
       type: object
       properties:
         id:
           type: string
           example: '57e7012c-2b6f-4e8b-ab86-e9fb91d4754e'
-        markers:
+        position:
           type: array
           items:
             type: array
