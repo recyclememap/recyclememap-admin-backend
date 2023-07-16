@@ -33,7 +33,7 @@ describe('Markers controller', () => {
         });
     });
 
-    it('returns 200 with empty array if there is no suggested markers in DB', async () => {
+    it('returns 200 with an empty array if there are no suggested markers in DB', async () => {
       await insertDataToDB('Markers', MOCK_APPROVED_DB_MARKERS, markersSchema);
 
       await request(app)
