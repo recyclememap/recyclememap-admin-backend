@@ -8,9 +8,7 @@ servers:
   - url: http://127.0.0.1:3102/api
 tags:
   - name: markers
-    description: List of suggested markers
-  - name: suggestions
-    description: Suggested marker
+    description: Operations related to markers
 
 paths:
   /markers:
@@ -32,7 +30,7 @@ paths:
           type: integer
     patch:
       tags:
-        - suggestions
+        - markers
       summary: Update an existing marker
       description: Update an existing marker
       operationId: updateMarker
@@ -74,7 +72,7 @@ components:
           type: array
           items:
             type: number
-            example: [10.4, 10.4]
+          example: [10.4, 10.4]
     MarkersResponse:
       required:
         - id
@@ -86,12 +84,19 @@ components:
           type: string
           example: '57e7012c-2b6f-4e8b-ab86-e9fb91d4754e'
         position:
-          type: array
-          items:
-            type: array
-            items:
-              type: number
-              example: [[10.4, 10.4]]
+          type: object
+          properties:
+            approvedValue:
+              type: array
+              items:
+                type: number
+            suggestedValue:
+              type: array
+              items:
+                type: array
+                items:
+                  type: number
+          example: {approvedValue: [10.4, 10.4], suggestedValue: [[10.4, 10.4]]}
         date:
           type: string
           format: date-time
