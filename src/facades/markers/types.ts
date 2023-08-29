@@ -1,6 +1,9 @@
 export type SuggestedMarker = {
   id: string;
-  position: number[][];
+  position: {
+    suggestedValue: number[][];
+    approvedValue: number[];
+  };
   date: string;
 };
 
