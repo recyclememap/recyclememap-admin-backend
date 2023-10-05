@@ -77,6 +77,8 @@ components:
       required:
         - id
         - position
+        - wasteTypes
+        - address
         - date
       type: object
       properties:
@@ -97,10 +99,41 @@ components:
                 items:
                   type: number
           example: {approvedValue: [10.4, 10.4], suggestedValue: [[10.4, 10.4]]}
+        wasteTypes:
+          type: object
+          properties:
+            approvedValue:
+              type: array
+              items:
+                $ref: '#/components/schemas/WasteTypes'
+            suggestedValue:
+              type: array
+              items:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WasteTypes'
+          example: {approvedValue: ['packing', 'plastic'], suggestedValue: [['packing', 'plastic']]}
+        address:
+          type: object
+          properties:
+            approvedValue:
+              type: array
+              items:
+                type: string
+            suggestedValue:
+              type: array
+              items:
+                type: array
+                items:
+                  type: string
+          example: {approvedValue: 'street, 4', suggestedValue: ['street, 4', 'street, 5']}
         date:
           type: string
           format: date-time
           example: '2023-03-11T18:33:35.687+00:00'
+    WasteTypes:
+      type: string
+      enum: ['packing', 'plastic', 'batteries', 'carton', 'clothes', 'paper', 'glass']
   requestBodies:
     UpdateMarker:
       description: Update an existing marker

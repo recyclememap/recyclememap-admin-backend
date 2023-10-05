@@ -6,7 +6,11 @@ import { SuggestedMarkersList } from './types';
 export class MarkersFacade {
   static async getSuggestMarkers(): Promise<SuggestedMarkersList> {
     const suggestedMarkers = await MarkersDB.find({
-      'position.suggestedValue': { $exists: true, $ne: [] }
+      $or: [
+        { 'position.suggestedValue': { $exists: true, $not: { $size: 0 } } },
+        { 'wasteTypes.suggestedValue': { $exists: true, $not: { $size: 0 } } },
+        { 'address.suggestedValue': { $exists: true, $not: { $size: 0 } } }
+      ]
     });
 
     const suggestedMarkersDto = suggestedMarkers.map(
