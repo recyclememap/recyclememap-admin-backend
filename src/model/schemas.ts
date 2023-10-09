@@ -15,6 +15,27 @@ export const markersSchema = new Schema({
       required: true
     }
   },
+  wasteTypes: {
+    suggestedValue: {
+      type: [[String]],
+      required: true
+    },
+    approvedValue: {
+      type: [String],
+      required: true
+    }
+  },
+  address: {
+    suggestedValue: {
+      type: [String],
+      required: true
+    },
+    approvedValue: {
+      type: String,
+      required: false,
+      default: ''
+    }
+  },
   date: {
     type: String,
     required: true

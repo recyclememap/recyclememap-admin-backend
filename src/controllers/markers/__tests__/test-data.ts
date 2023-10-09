@@ -1,3 +1,5 @@
+import { WasteTypes } from '@root/facades/markers/types';
+
 export const MOCK_DB_MARKERS = [
   {
     id: 'testId',
@@ -8,13 +10,35 @@ export const MOCK_DB_MARKERS = [
       ],
       approvedValue: []
     },
+    wasteTypes: {
+      suggestedValue: [
+        [WasteTypes.Batteries, WasteTypes.Carton],
+        [WasteTypes.Packing]
+      ],
+      approvedValue: []
+    },
+    address: {
+      suggestedValue: ['suggestedAddress'],
+      approvedValue: ''
+    },
     date: '2023-07-15T21:37:05.406Z'
   },
   {
     id: 'testId2',
     position: {
-      suggestedValue: [[123, 456]],
-      approvedValue: [1.4, 2.3]
+      suggestedValue: [],
+      approvedValue: [1.4, 0.1]
+    },
+    wasteTypes: {
+      suggestedValue: [
+        [WasteTypes.Batteries, WasteTypes.Carton],
+        [WasteTypes.Packing]
+      ],
+      approvedValue: [WasteTypes.Carton]
+    },
+    address: {
+      suggestedValue: ['suggestedAddress'],
+      approvedValue: 'approvedAddress'
     },
     date: '2023-08-15T21:37:05.406Z'
   },
@@ -23,6 +47,14 @@ export const MOCK_DB_MARKERS = [
     position: {
       suggestedValue: [],
       approvedValue: [1.4, 2.3]
+    },
+    wasteTypes: {
+      suggestedValue: [],
+      approvedValue: [WasteTypes.Batteries]
+    },
+    address: {
+      suggestedValue: [],
+      approvedValue: 'approvedAddress'
     },
     date: '2023-09-15T21:37:05.406Z'
   }
@@ -34,6 +66,14 @@ export const MOCK_APPROVED_DB_MARKERS = [
     position: {
       suggestedValue: [],
       approvedValue: [1.4, 2.3]
+    },
+    wasteTypes: {
+      suggestedValue: [],
+      approvedValue: [WasteTypes.Batteries]
+    },
+    address: {
+      suggestedValue: [],
+      approvedValue: 'approvedAddress'
     },
     date: '2023-07-15T21:37:05.406Z'
   }
@@ -49,13 +89,35 @@ export const MOCK_SUGGESTED_MARKERS_RESPONSE = [
       ],
       approvedValue: []
     },
+    wasteTypes: {
+      suggestedValue: [
+        [WasteTypes.Batteries, WasteTypes.Carton],
+        [WasteTypes.Packing]
+      ],
+      approvedValue: []
+    },
+    address: {
+      suggestedValue: ['suggestedAddress'],
+      approvedValue: ''
+    },
     date: '2023-07-15T21:37:05.406Z'
   },
   {
     id: 'testId2',
     position: {
-      suggestedValue: [[123, 456]],
-      approvedValue: [1.4, 2.3]
+      suggestedValue: [],
+      approvedValue: [1.4, 0.1]
+    },
+    wasteTypes: {
+      suggestedValue: [
+        [WasteTypes.Batteries, WasteTypes.Carton],
+        [WasteTypes.Packing]
+      ],
+      approvedValue: [WasteTypes.Carton]
+    },
+    address: {
+      suggestedValue: ['suggestedAddress'],
+      approvedValue: 'approvedAddress'
     },
     date: '2023-08-15T21:37:05.406Z'
   }
