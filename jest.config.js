@@ -14,7 +14,9 @@ const config = {
     '^@controllers(.*)$': '<rootDir>/src/controllers$1',
     '^@facades(.*)$': '<rootDir>/src/facades$1',
     '^@model(.*)$': '<rootDir>/src/model$1'
-  }
+  },
+  setupFiles: ['<rootDir>/configs/tests/setEnvVars.ts'],
+  setupFilesAfterEnv: ['<rootDir>/configs/tests/jest.setup.ts']
 };
 
 module.exports = config;
