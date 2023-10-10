@@ -11,9 +11,6 @@
     "lint": "eslint src --ext .tsx --ext .ts --max-warnings 0",
     "verify": "pnpm type && pnpm lint && pnpm test"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "dependencies": {
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
