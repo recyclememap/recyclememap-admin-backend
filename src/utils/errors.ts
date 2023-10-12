@@ -1,3 +1,6 @@
+import { StatusCodes } from '@commons/constants';
+import { GenericObject } from '@commons/types';
+
 export class ApiError extends Error {
   status;
   error;
@@ -12,4 +15,10 @@ export class ApiError extends Error {
   static BadRequest(message: string, error?: any) {
     return new ApiError(400, message, error);
   }
+}
+
+export interface AuthError extends Error {
+  status: StatusCodes;
+  statusCode: StatusCodes;
+  headers: GenericObject;
 }

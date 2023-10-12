@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from '@commons/constants';
-import { ApiError } from '@utils/errors';
+import { ApiError, AuthError } from '@utils/errors';
 
 export const errorHandler = (
   err: Error,
@@ -12,6 +12,19 @@ export const errorHandler = (
     return res
       .status(err.status)
       .send({ message: err.message, error: err.error });
+  }
+
+  next(err);
+};
+
+export const authErrorHandler = (
+  err: AuthError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (err.status === StatusCodes.Unathorized) {
+    return res.sendStatus(err.status);
   }
 
   next(err);

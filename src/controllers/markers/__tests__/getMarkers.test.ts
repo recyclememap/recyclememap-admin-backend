@@ -4,6 +4,7 @@ import { StatusCodes } from '@root/commons/constants';
 import { markersSchema } from '@root/model/schemas';
 import { insertDataToDB } from '@root/utils/tests/helpers';
 import { connectDB, dropDB, dropCollections } from '@utils/tests/dbConnection';
+import { AUTH_JWT } from '@utils/tests/testData';
 import {
   MOCK_DB_MARKERS,
   MOCK_APPROVED_DB_MARKERS,
@@ -14,9 +15,11 @@ describe('Markers controller', () => {
   beforeAll(async () => {
     await connectDB();
   });
+
   afterAll(async () => {
     await dropDB();
   });
+
   afterEach(async () => {
     await dropCollections();
   });
@@ -27,6 +30,7 @@ describe('Markers controller', () => {
 
       await request(app)
         .get('/api/markers')
+        .set('Authorization', `Bearer ${AUTH_JWT}`)
         .expect(StatusCodes.Ok)
         .expect((res) => {
           expect(res.body).toStrictEqual(MOCK_SUGGESTED_MARKERS_RESPONSE);
@@ -38,6 +42,7 @@ describe('Markers controller', () => {
 
       await request(app)
         .get('/api/markers')
+        .set('Authorization', `Bearer ${AUTH_JWT}`)
         .expect(StatusCodes.Ok)
         .expect((res) => {
           expect(res.body).toStrictEqual([]);
