@@ -6,7 +6,7 @@ import { auth } from 'express-oauth2-jwt-bearer';
 import {
   errorHandler,
   defaultErrorHandler,
-  AuthErrorHandler
+  authErrorHandler
 } from '@utils/middleware';
 import { markers } from './controllers';
 
@@ -14,7 +14,7 @@ dotenv.config();
 
 export const app = express();
 
-const checkJwt = auth({
+const authVerifier = auth({
   audience: process.env.AUDIENCE,
   issuerBaseURL: process.env.ISSUER_BASE_URL
 });
@@ -27,7 +27,7 @@ app.use(
     origin: process.env.CLIENT_URL
   })
 );
-app.use(checkJwt);
+app.use(authVerifier);
 
 // Routes
 const routes = Router();
@@ -35,7 +35,7 @@ routes.use('/markers', markers);
 
 app.use('/api', routes);
 app.use(errorHandler);
-app.use(AuthErrorHandler);
+app.use(authErrorHandler);
 app.use(defaultErrorHandler);
 
 app.set('port', process.env.PORT || 3102);

@@ -17,7 +17,7 @@ export const errorHandler = (
   next(err);
 };
 
-export const AuthErrorHandler = (
+export const authErrorHandler = (
   err: AuthError,
   req: Request,
   res: Response,
