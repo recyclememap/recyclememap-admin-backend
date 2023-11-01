@@ -35,12 +35,25 @@ paths:
       description: Update an existing marker
       operationId: updateMarker
       requestBody:
-          $ref: '#/components/requestBodies/UpdateMarker'
+        $ref: '#/components/requestBodies/UpdateMarker'
       responses:
         '204':
-          description: No Content    
+          description: No Content
         '400':
           $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - markers
+      summary: Delete suggested marker
+      description: Delete suggested marker
+      operationId: deleteMarker
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/NotFound'
 
 components:
   schemas:
@@ -65,14 +78,55 @@ components:
           example: 'Invalid value'
       additionalProperties:
         $ref: '#/components/schemas/BadRequestDetails'
+    NotFoundError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'Marker not found'
     UpdateMarkerRequest:
       type: object
       properties:
         position:
-          type: array
-          items:
-            type: number
-          example: [10.4, 10.4]
+          type: object
+          properties:
+            approvedValue:
+              type: array
+              items:
+                type: number
+            suggestedValue:
+              type: array
+              items:
+                type: array
+                items:
+                  type: number
+        wasteTypes:
+          type: object
+          properties:
+            approvedValue:
+              type: array
+              items:
+                $ref: '#/components/schemas/WasteTypes'
+            suggestedValue:
+              type: array
+              items:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WasteTypes'
+        address:
+          type: object
+          properties:
+            approvedValue:
+              type: array
+              items:
+                type: string
+              example: []
+            suggestedValue:
+              type: array
+              items:
+                type: array
+                items:
+                  type: string
     MarkersResponse:
       required:
         - id
@@ -156,3 +210,9 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BadRequestError'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundError'

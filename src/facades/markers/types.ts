@@ -1,3 +1,5 @@
+import { MakePartial } from '@root/commons/types';
+
 export enum WasteTypes {
   Packing = 'packing',
   Plastic = 'plastic',
@@ -6,6 +8,12 @@ export enum WasteTypes {
   Clothes = 'clothes',
   Paper = 'paper',
   Glass = 'glass'
+}
+
+export enum MarkerProperties {
+  position = 'position',
+  wasteTypes = 'wasteTypes',
+  address = 'address'
 }
 
 export type SuggestedMarker = {
@@ -26,3 +34,18 @@ export type SuggestedMarker = {
 };
 
 export type SuggestedMarkersList = SuggestedMarker[];
+
+type PropertyType<S, A> = {
+  suggestedValue: S;
+  approvedValue: A;
+};
+
+export type PositionType = PropertyType<number[][], number[] | []>;
+export type WateTypesType = PropertyType<WasteTypes[][], WasteTypes[]>;
+export type AddressType = PropertyType<string[], string>;
+
+export type ApprovedMarker = MakePartial<{
+  [MarkerProperties.position]: PositionType;
+  [MarkerProperties.wasteTypes]: WateTypesType;
+  [MarkerProperties.address]: AddressType;
+}>;

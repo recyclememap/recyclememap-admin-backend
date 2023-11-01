@@ -4,17 +4,11 @@ export const MOCK_DB_MARKERS = [
   {
     id: 'testId',
     position: {
-      suggestedValue: [
-        [123, 456],
-        [222, 333]
-      ],
+      suggestedValue: [[123, 456]],
       approvedValue: []
     },
     wasteTypes: {
-      suggestedValue: [
-        [WasteTypes.Batteries, WasteTypes.Carton],
-        [WasteTypes.Packing]
-      ],
+      suggestedValue: [[WasteTypes.Batteries, WasteTypes.Carton]],
       approvedValue: []
     },
     address: {
@@ -83,17 +77,11 @@ export const MOCK_SUGGESTED_MARKERS_RESPONSE = [
   {
     id: 'testId',
     position: {
-      suggestedValue: [
-        [123, 456],
-        [222, 333]
-      ],
+      suggestedValue: [[123, 456]],
       approvedValue: []
     },
     wasteTypes: {
-      suggestedValue: [
-        [WasteTypes.Batteries, WasteTypes.Carton],
-        [WasteTypes.Packing]
-      ],
+      suggestedValue: [[WasteTypes.Batteries, WasteTypes.Carton]],
       approvedValue: []
     },
     address: {
@@ -122,3 +110,20 @@ export const MOCK_SUGGESTED_MARKERS_RESPONSE = [
     date: '2023-08-15T21:37:05.406Z'
   }
 ];
+
+export const MOCK_APPROVED_MARKER = {
+  position: {
+    suggestedValue: [],
+    approvedValue: [123, 456]
+  },
+  wasteTypes: {
+    suggestedValue: [],
+    approvedValue: [WasteTypes.Batteries, WasteTypes.Carton]
+  },
+  address: {
+    suggestedValue: [],
+    approvedValue: 'suggestedAddress'
+  }
+};
+
+export const MARKERS_DB_NAME = 'Markers';

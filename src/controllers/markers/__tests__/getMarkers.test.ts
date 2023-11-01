@@ -11,7 +11,7 @@ import {
   MOCK_SUGGESTED_MARKERS_RESPONSE
 } from './test-data';
 
-describe('Markers controller', () => {
+describe('GET /api/markers', () => {
   beforeAll(async () => {
     await connectDB();
   });
@@ -24,29 +24,27 @@ describe('Markers controller', () => {
     await dropCollections();
   });
 
-  describe('GET /api/markers', () => {
-    it('returns 200 with correct markers', async () => {
-      await insertDataToDB('Markers', MOCK_DB_MARKERS, markersSchema);
+  it('returns 200 with correct markers', async () => {
+    await insertDataToDB('Markers', MOCK_DB_MARKERS, markersSchema);
 
-      await request(app)
-        .get('/api/markers')
-        .set('Authorization', `Bearer ${AUTH_JWT}`)
-        .expect(StatusCodes.Ok)
-        .expect((res) => {
-          expect(res.body).toStrictEqual(MOCK_SUGGESTED_MARKERS_RESPONSE);
-        });
-    });
+    await request(app)
+      .get('/api/markers')
+      .set('Authorization', `Bearer ${AUTH_JWT}`)
+      .expect(StatusCodes.Ok)
+      .expect((res) => {
+        expect(res.body).toStrictEqual(MOCK_SUGGESTED_MARKERS_RESPONSE);
+      });
+  });
 
-    it('returns 200 with an empty array if there are no suggested markers in DB', async () => {
-      await insertDataToDB('Markers', MOCK_APPROVED_DB_MARKERS, markersSchema);
+  it('returns 200 with an empty array if there are no suggested markers in DB', async () => {
+    await insertDataToDB('Markers', MOCK_APPROVED_DB_MARKERS, markersSchema);
 
-      await request(app)
-        .get('/api/markers')
-        .set('Authorization', `Bearer ${AUTH_JWT}`)
-        .expect(StatusCodes.Ok)
-        .expect((res) => {
-          expect(res.body).toStrictEqual([]);
-        });
-    });
+    await request(app)
+      .get('/api/markers')
+      .set('Authorization', `Bearer ${AUTH_JWT}`)
+      .expect(StatusCodes.Ok)
+      .expect((res) => {
+        expect(res.body).toStrictEqual([]);
+      });
   });
 });

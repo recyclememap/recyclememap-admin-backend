@@ -13,7 +13,11 @@ export class ApiError extends Error {
   }
 
   static BadRequest(message: string, error?: any) {
-    return new ApiError(400, message, error);
+    return new ApiError(StatusCodes.BadRequest, message, error);
+  }
+
+  static NotFound(message: string, error?: any) {
+    return new ApiError(StatusCodes.NotFound, message, error);
   }
 }
 
