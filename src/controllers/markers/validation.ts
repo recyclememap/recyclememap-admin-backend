@@ -13,7 +13,12 @@ const isContainOnlyNumbers = (arr: any[]) => {
 };
 
 const checkPositionProperty = (propertyValue: any[]) => {
-  if (propertyValue.length !== 2 || !isContainOnlyNumbers(propertyValue)) {
+  const COORDINATES_LENGTH = 2;
+
+  if (
+    propertyValue.length !== COORDINATES_LENGTH ||
+    !isContainOnlyNumbers(propertyValue)
+  ) {
     throw ApiError.BadRequest(
       'The position property must have the correct type.'
     );
