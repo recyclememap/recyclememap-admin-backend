@@ -32,11 +32,12 @@ export class MarkersFacade {
     const markersToUpdateProperties = Object.keys(markerToUpdate);
 
     if (
+      markersToUpdateProperties.length === 0 ||
       !markersToUpdateProperties.every((property) =>
         Object.values(MarkerProperties).includes(property as MarkerProperties)
       )
     ) {
-      throw ApiError.BadRequest('Body contains incorrect properties');
+      throw ApiError.BadRequest('Body contains incorrect properties or empty');
     }
 
     const suggestedMarker = await MarkersDB.findOne({
@@ -51,7 +52,8 @@ export class MarkersFacade {
 
     const markerToUpdateDTO = new MarkerDto({
       ...suggestedMarkerDTO,
-      ...markerToUpdate
+      ...markerToUpdate,
+      date: new Date().toISOString()
     } as DBMarker);
 
     await MarkersDB.replaceOne(

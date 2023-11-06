@@ -52,6 +52,7 @@ const checkAddressProperty = (propertyValue: any[]) => {
 
 export const updateMarkerSchema = {
   position: {
+    optional: { options: { nullable: true } },
     custom: {
       options: (position: PositionType) => {
         if (
@@ -78,6 +79,7 @@ export const updateMarkerSchema = {
     }
   },
   wasteTypes: {
+    optional: { options: { nullable: true } },
     custom: {
       options: (wasteTypes: WateTypesType) => {
         if (
@@ -104,6 +106,7 @@ export const updateMarkerSchema = {
     }
   },
   address: {
+    optional: { options: { nullable: true } },
     custom: {
       options: (address: AddressType) => {
         if (
