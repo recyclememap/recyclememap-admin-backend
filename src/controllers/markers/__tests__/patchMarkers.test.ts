@@ -58,7 +58,9 @@ describe('PATCH /api/markers/:markerId', () => {
       .set('Authorization', `Bearer ${AUTH_JWT}`)
       .expect(StatusCodes.BadRequest)
       .expect(async (res) => {
-        expect(res.body.message).toBe('Body contains incorrect properties');
+        expect(res.body.message).toBe(
+          'Body contains incorrect properties or is empty'
+        );
       });
   });
 
@@ -71,7 +73,9 @@ describe('PATCH /api/markers/:markerId', () => {
       .set('Authorization', `Bearer ${AUTH_JWT}`)
       .expect(StatusCodes.BadRequest)
       .expect(async (res) => {
-        expect(res.body.message).toBe('Invalid value');
+        expect(res.body.message).toBe(
+          'Body contains incorrect properties or is empty'
+        );
       });
   });
 
