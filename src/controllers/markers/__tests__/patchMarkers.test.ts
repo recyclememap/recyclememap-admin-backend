@@ -59,7 +59,7 @@ describe('PATCH /api/markers/:markerId', () => {
       .expect(StatusCodes.BadRequest)
       .expect(async (res) => {
         expect(res.body.message).toBe(
-          'Body contains incorrect properties or empty'
+          'Body contains incorrect properties or is empty'
         );
       });
   });
