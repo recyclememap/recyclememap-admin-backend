@@ -37,7 +37,9 @@ export class MarkersFacade {
         Object.values(MarkerProperties).includes(property as MarkerProperties)
       )
     ) {
-      throw ApiError.BadRequest('Body contains incorrect properties or is empty');
+      throw ApiError.BadRequest(
+        'Body contains incorrect properties or is empty'
+      );
     }
 
     const suggestedMarker = await MarkersDB.findOne({
