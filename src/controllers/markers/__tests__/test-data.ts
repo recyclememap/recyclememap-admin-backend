@@ -127,3 +127,6 @@ export const MOCK_APPROVED_MARKER = {
 };
 
 export const MARKERS_DB_NAME = 'Markers';
+
+export const LONG_ADDRESS =
+  'This is a test string with more than 70 characters, which is not valid!';
