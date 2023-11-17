@@ -6,6 +6,8 @@ import {
 } from '@root/facades/markers/types';
 import { ApiError } from '@root/utils/errors';
 
+const MAX_ADDRESS_LENGTH = 70;
+
 const isContainOnlyNumbers = (arr: any[]) => {
   return arr.every((element) => {
     return typeof element === 'number';
@@ -42,7 +44,9 @@ const checkWasteTypesProperty = (propertyValue: any[]) => {
 const checkAddressProperty = (propertyValue: any[]) => {
   if (
     propertyValue.length &&
-    !propertyValue.every((value) => typeof value === 'string')
+    !propertyValue.every(
+      (value) => typeof value === 'string' && value.length < MAX_ADDRESS_LENGTH
+    )
   ) {
     throw ApiError.BadRequest(
       'The address property must have the correct type.'
@@ -111,6 +115,7 @@ export const updateMarkerSchema = {
       options: (address: AddressType) => {
         if (
           typeof address.approvedValue !== 'string' ||
+          address.approvedValue.length > MAX_ADDRESS_LENGTH ||
           !Array.isArray(address.suggestedValue)
         ) {
           throw ApiError.BadRequest(

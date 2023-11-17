@@ -14,7 +14,8 @@ import { AUTH_JWT } from '@utils/tests/testData';
 import {
   MOCK_DB_MARKERS,
   MARKERS_DB_NAME,
-  MOCK_APPROVED_MARKER
+  MOCK_APPROVED_MARKER,
+  LONG_ADDRESS
 } from './test-data';
 
 describe('PATCH /api/markers/:markerId', () => {
@@ -535,6 +536,35 @@ describe('PATCH /api/markers/:markerId', () => {
             );
           });
       });
+
+      it('returns 400 if value length is more than 70 characters', async () => {
+        await request(app)
+          .patch(`/api/markers/${MOCK_DB_MARKERS[0].id}`)
+          .send({
+            ...MOCK_APPROVED_MARKER,
+            address: {
+              suggestedValue: MOCK_APPROVED_MARKER.address.suggestedValue,
+              approvedValue: LONG_ADDRESS
+            }
+          })
+          .set('Authorization', `Bearer ${AUTH_JWT}`)
+          .expect(StatusCodes.BadRequest)
+          .then((res) => {
+            expect(extractValidationError(res)).toStrictEqual(
+              createValidationError(
+                'address',
+                'body',
+                'The address property must have the correct type.',
+                {
+                  value: {
+                    suggestedValue: MOCK_APPROVED_MARKER.address.suggestedValue,
+                    approvedValue: LONG_ADDRESS
+                  }
+                }
+              )
+            );
+          });
+      });
     });
 
     describe('suggestedValue', () => {
@@ -588,6 +618,35 @@ describe('PATCH /api/markers/:markerId', () => {
                 {
                   value: {
                     suggestedValue: ['correct', 123],
+                    approvedValue: MOCK_APPROVED_MARKER.address.approvedValue
+                  }
+                }
+              )
+            );
+          });
+      });
+
+      it('returns 400 if one of the suggestions length is more than 70 characters', async () => {
+        await request(app)
+          .patch(`/api/markers/${MOCK_DB_MARKERS[0].id}`)
+          .send({
+            ...MOCK_APPROVED_MARKER,
+            address: {
+              suggestedValue: ['correct', LONG_ADDRESS],
+              approvedValue: MOCK_APPROVED_MARKER.address.approvedValue
+            }
+          })
+          .set('Authorization', `Bearer ${AUTH_JWT}`)
+          .expect(StatusCodes.BadRequest)
+          .then((res) => {
+            expect(extractValidationError(res)).toStrictEqual(
+              createValidationError(
+                'address',
+                'body',
+                'The address property must have the correct type.',
+                {
+                  value: {
+                    suggestedValue: ['correct', LONG_ADDRESS],
                     approvedValue: MOCK_APPROVED_MARKER.address.approvedValue
                   }
                 }
